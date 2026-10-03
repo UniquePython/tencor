@@ -5,6 +5,27 @@
 
 #include <stdalign.h>
 
+usz TencorKiB(usz n)
+{
+    usz bytes;
+    Require(UszMul(n, (usz)1024, &bytes), "memory requested is too large: %zu KiB", n);
+    return bytes;
+}
+
+usz TencorMiB(usz n)
+{
+    usz bytes;
+    Require(UszMul(n, (usz)1024 * 1024, &bytes), "memory requested is too large: %zu MiB", n);
+    return bytes;
+}
+
+usz TencorGiB(usz n)
+{
+    usz bytes;
+    Require(UszMul(n, (usz)1024 * 1024 * 1024, &bytes), "memory requested is too large: %zu GiB", n);
+    return bytes;
+}
+
 void *TencorArenaAllocAligned(TencorArena *self, usz size, usz alignment)
 {
     RequireNonNull(self, "%s", "self is NULL");

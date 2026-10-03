@@ -5,6 +5,10 @@
 
 typedef struct TencorArena TencorArena;
 
+size_t TencorKiB(size_t n);
+size_t TencorMiB(size_t n);
+size_t TencorGiB(size_t n);
+
 void *TencorArenaAllocAligned(TencorArena *self, size_t size, size_t alignment);
 void *TencorArenaAlloc(TencorArena *self, size_t size);
 

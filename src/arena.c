@@ -53,6 +53,18 @@ TencorArena *TencorArenaCreate(usz capacity)
     return arena;
 }
 
+void TencorArenaDestroy(TencorArena **arena)
+{
+    RequireNonNull(arena, "%s", "pointer to arena is NULL");
+    RequireNonNull(*arena, "%s", "arena is NULL");
+
+    if ((*arena)->owned)
+        free((*arena)->base);
+
+    free(*arena);
+    *arena = NULL;
+}
+
 void *TencorArenaAllocAligned(TencorArena *self, usz size, usz alignment)
 {
     RequireNonNull(self, "%s", "self is NULL");

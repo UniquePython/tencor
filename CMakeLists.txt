@@ -35,7 +35,6 @@ set(TENCOR_WARNINGS
     -Wvla
     -Wnull-dereference
     -Wdouble-promotion
-    -Walloc-zero
     -Wstrict-overflow=5
     -Wswitch-enum
     -Wpointer-arith
@@ -43,6 +42,7 @@ set(TENCOR_WARNINGS
 
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     list(APPEND TENCOR_WARNINGS
+        -Walloc-zero
         -Wlogical-op
         -Wformat-overflow=2
         -Wformat-truncation=2

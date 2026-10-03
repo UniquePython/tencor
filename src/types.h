@@ -11,4 +11,6 @@ typedef size_t usz;
 
 typedef uintptr_t uptr;
 
+typedef float f32;
+
 #endif // TYPES_H_

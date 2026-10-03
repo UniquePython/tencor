@@ -53,6 +53,12 @@ TencorArena *TencorArenaCreate(usz capacity)
     return arena;
 }
 
+void TencorArenaReset(TencorArena *self)
+{
+    RequireNonNull(self, "%s", "self is NULL");
+    self->used = 0;
+}
+
 void TencorArenaDestroy(TencorArena **arena)
 {
     RequireNonNull(arena, "%s", "pointer to arena is NULL");

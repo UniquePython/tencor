@@ -17,3 +17,12 @@ bool UszSub(usz a, usz b, usz *result)
     *result = a - b;
     return true;
 }
+
+bool UszMul(usz a, usz b, usz *result)
+{
+    if (b != 0 && a > SIZE_MAX / b)
+        return false;
+
+    *result = a * b;
+    return true;
+}

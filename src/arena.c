@@ -46,6 +46,8 @@ TencorArena *TencorArenaInit(void *buffer, usz capacity)
 
 TencorArena *TencorArenaCreate(usz capacity)
 {
+    Require(capacity != 0, "%s", "capacity is 0");
+
     void *buffer = malloc(capacity);
     RequireNonNull(buffer, "%s", "failed to allocate backing buffer for arena");
     TencorArena *arena = TencorArenaInit(buffer, capacity);

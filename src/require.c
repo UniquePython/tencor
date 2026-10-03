@@ -1,9 +1,10 @@
 #include "require.h"
-
+#include "attributes.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+TENCOR_PRINTF(2, 0)
 static void error(const char *func, const char *fmt, va_list args)
 {
     fprintf(stderr, "%s: ", func);

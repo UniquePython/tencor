@@ -4,6 +4,8 @@
 #include "types.h"
 #include "tencor/tencor.h"
 
+#define TENCOR_DATA_ALIGNMENT 64
+
 struct Tencor
 {
     f32 *data;

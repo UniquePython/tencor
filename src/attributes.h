@@ -10,6 +10,9 @@
 // clang-format off
 #define TENCOR_NONNULL(...)    __attribute__((nonnull(__VA_ARGS__)))
 #define TENCOR_PRINTF(fmt, va) __attribute__((format(printf, fmt, va)))
+#define TENCOR_NORETURN        __attribute__((noreturn))
+#define TENCOR_COLD            __attribute__((cold))
+#define TENCOR_UNLIKELY(x)     __builtin_expect(!!(x), 0)
 // clang-format on
 
 #if __has_attribute(access)

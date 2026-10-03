@@ -12,14 +12,11 @@ static void error(const char *func, const char *fmt, va_list args)
     fputc('\n', stderr);
 }
 
-void require(bool condition, const char *func, const char *fmt, ...)
+void requireFail(const char *func, const char *fmt, ...)
 {
-    if (!condition)
-    {
-        va_list args;
-        va_start(args, fmt);
-        error(func, fmt, args);
-        va_end(args);
-        abort();
-    }
+    va_list args;
+    va_start(args, fmt);
+    error(func, fmt, args);
+    va_end(args);
+    abort();
 }

@@ -1,8 +1,8 @@
 #ifndef TENCOR_ATTRIBUTES_H_
 #define TENCOR_ATTRIBUTES_H_
 
-#if !defined(__linux__) || !defined(__GNUC__)
-#error "tencor currently supports only GCC or Clang on Linux"
+#if !defined(__GNUC__) || !(defined(__linux__) || defined(__APPLE__))
+#error "tencor currently supports only GCC or Clang on Linux and macOS"
 #endif
 
 // clang-format off

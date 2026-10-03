@@ -51,6 +51,11 @@ if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
 endif()
 
 target_compile_options(tencor PRIVATE ${TENCOR_WARNINGS})
-target_link_options(tencor PRIVATE -Wl,-z,defs)
+
+if(APPLE)
+    target_link_options(tencor PRIVATE -Wl,-undefined,error)
+else()
+    target_link_options(tencor PRIVATE -Wl,-z,defs)
+endif()
 
 set_target_properties(tencor PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

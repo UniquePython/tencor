@@ -7,13 +7,17 @@ on:
 
 jobs:
     build:
-        name: ${{ matrix.cc }} / ${{ matrix.build_type }}
-        runs-on: ubuntu-latest
+        name: ${{ matrix.os }} / ${{ matrix.cc }} / ${{ matrix.build_type }}
+        runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: false
             matrix:
+                os: [ubuntu-latest, macos-latest]
                 cc: [gcc, clang]
                 build_type: [Debug, Release]
+                exclude:
+                    - os: macos-latest
+                      cc: gcc
 
         steps:
             - uses: actions/checkout@v4
@@ -30,12 +34,24 @@ jobs:
             - name: Build
               run: cmake --build build --parallel
 
-            - name: Check exported symbols
+            - name: Check exported symbols (Linux)
+              if: runner.os == 'Linux'
               run: |
                   nm -D --defined-only build/lib/libtencor.so
-                  # Only Tencor* should be exported (ignore linker-generated _-prefixed symbols)
                   leaked=$(nm -D --defined-only build/lib/libtencor.so \
                     | awk '{print $3}' | grep -v '^_' | grep -v '^Tencor' || true)
+                  if [ -n "$leaked" ]; then
+                    echo "Unexpected exported symbols:"
+                    echo "$leaked"
+                    exit 1
+                  fi
+
+            - name: Check exported symbols (macOS)
+              if: runner.os == 'macOS'
+              run: |
+                  nm -gU build/lib/libtencor.dylib
+                  leaked=$(nm -gU build/lib/libtencor.dylib \
+                    | awk '{print $3}' | grep -v '^_Tencor' || true)
                   if [ -n "$leaked" ]; then
                     echo "Unexpected exported symbols:"
                     echo "$leaked"

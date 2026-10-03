@@ -22,3 +22,20 @@ void TencorRequireNoPartialOverlap(const Tencor *first, const Tencor *second)
 
     Require(!overlaps || identical, "%s", "tensors partially overlap in memory");
 }
+
+void TencorRequireElementwise(const Tencor *out, const Tencor *first, const Tencor *second)
+{
+    RequireNonNull(out, "%s", "out is NULL");
+    RequireNonNull(first, "%s", "first is NULL");
+    RequireNonNull(second, "%s", "second is NULL");
+
+    TencorRequireSameShape(first, second);
+    TencorRequireSameShape(out, first);
+
+    Require(TencorIsContiguous(out), "%s", "out must be contiguous");
+    Require(TencorIsContiguous(first), "%s", "first must be contiguous");
+    Require(TencorIsContiguous(second), "%s", "second must be contiguous");
+
+    TencorRequireNoPartialOverlap(out, first);
+    TencorRequireNoPartialOverlap(out, second);
+}

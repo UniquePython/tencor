@@ -17,5 +17,6 @@ struct Tencor
 
 void TencorRequireSameShape(const Tencor *first, const Tencor *second);
 void TencorRequireNoPartialOverlap(const Tencor *first, const Tencor *second);
+void TencorRequireElementwise(const Tencor *out, const Tencor *first, const Tencor *second);
 
 #endif // TENCOR_H_

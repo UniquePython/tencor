@@ -40,6 +40,15 @@ TENCOR_API TENCOR_NODISCARD
 bool TencorIsContiguous(const Tencor *tencor);
 
 TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorAdd(TencorArena *arena, const Tencor *first, const Tencor *second);
+
+TENCOR_API
+void TencorAddInto(Tencor *out, const Tencor *first, const Tencor *second);
+
+TENCOR_API
+void TencorAddInPlace(Tencor *first, const Tencor *second);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
 Tencor *TencorSub(TencorArena *arena, const Tencor *first, const Tencor *second);
 
 TENCOR_API

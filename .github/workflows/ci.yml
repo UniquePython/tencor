@@ -1,0 +1,59 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+
+jobs:
+    build:
+        name: ${{ matrix.cc }} / ${{ matrix.build_type }}
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                cc: [gcc, clang]
+                build_type: [Debug, Release]
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Show compiler version
+              run: ${{ matrix.cc }} --version
+
+            - name: Configure
+              run: >
+                  cmake -S . -B build
+                  -DCMAKE_C_COMPILER=${{ matrix.cc }}
+                  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+
+            - name: Build
+              run: cmake --build build --parallel
+
+            - name: Check exported symbols
+              run: |
+                  nm -D --defined-only build/lib/libtencor.so
+                  # Only Tencor* should be exported (ignore linker-generated _-prefixed symbols)
+                  leaked=$(nm -D --defined-only build/lib/libtencor.so \
+                    | awk '{print $3}' | grep -v '^_' | grep -v '^Tencor' || true)
+                  if [ -n "$leaked" ]; then
+                    echo "Unexpected exported symbols:"
+                    echo "$leaked"
+                    exit 1
+                  fi
+
+            - name: Smoke test
+              run: |
+                  cat > smoke.c <<'EOF'
+                  #include <tencor/arena.h>
+                  int main(void) {
+                      TencorArena *a = TencorArenaCreate(TencorKiB(4));
+                      void *p = TencorArenaAlloc(a, 64);
+                      (void)p;
+                      TencorArenaDestroy(&a);
+                      return 0;
+                  }
+                  EOF
+                  ${{ matrix.cc }} -std=c11 -Iinclude smoke.c \
+                    -Lbuild/lib -ltencor -Wl,-rpath,"$PWD/build/lib" -o smoke
+                  ./smoke

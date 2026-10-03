@@ -9,6 +9,7 @@ struct TencorArena
     u8 *base;
     usz capacity;
     usz used;
+    bool owned;
 };
 
 #endif

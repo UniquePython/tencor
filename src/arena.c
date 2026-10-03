@@ -2,7 +2,7 @@
 #include "arena.h"
 #include "require.h"
 #include "arithmetic.h"
-
+#include <stdlib.h>
 #include <stdalign.h>
 
 usz TencorKiB(usz n)
@@ -24,6 +24,33 @@ usz TencorGiB(usz n)
     usz bytes;
     Require(UszMul(n, (usz)1024 * 1024 * 1024, &bytes), "memory requested is too large: %zu GiB", n);
     return bytes;
+}
+
+TencorArena *TencorArenaInit(void *buffer, usz capacity)
+{
+    RequireNonNull(buffer, "%s", "buffer is NULL");
+    Require(capacity != 0, "%s", "capacity is 0");
+
+    TencorArena *arena = malloc(sizeof(*arena));
+    RequireNonNull(arena, "%s", "failed to allocate arena");
+
+    *arena = (TencorArena){
+        .base = buffer,
+        .capacity = capacity,
+        .used = 0,
+        .owned = false,
+    };
+
+    return arena;
+}
+
+TencorArena *TencorArenaCreate(usz capacity)
+{
+    void *buffer = malloc(capacity);
+    RequireNonNull(buffer, "%s", "failed to allocate backing buffer for arena");
+    TencorArena *arena = TencorArenaInit(buffer, capacity);
+    arena->owned = true;
+    return arena;
 }
 
 void *TencorArenaAllocAligned(TencorArena *self, usz size, usz alignment)

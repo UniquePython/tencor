@@ -5,7 +5,7 @@
 #include "attributes.h"
 #include "tencor/arena.h"
 
-TENCOR_DESIGNATED_INIT struct TencorArena
+struct TENCOR_DESIGNATED_INIT TencorArena
 {
     u8 *base;
     usz capacity;

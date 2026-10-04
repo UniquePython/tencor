@@ -114,6 +114,78 @@ void TencorDivScalarInto(Tencor *out, const Tencor *tencor, float scalar);
 TENCOR_API
 void TencorDivScalarInPlace(Tencor *tencor, float scalar);
 
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorNeg(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorNegInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorNegInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorAbs(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorAbsInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorAbsInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorSqrt(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorSqrtInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorSqrtInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorExp(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorExpInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorExpInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorLog(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorLogInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorLogInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorRelu(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorReluInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorReluInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorTanh(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorTanhInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorTanhInPlace(Tencor *tencor);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorSigmoid(TencorArena *arena, const Tencor *tencor);
+
+TENCOR_API
+void TencorSigmoidInto(Tencor *out, const Tencor *tencor);
+
+TENCOR_API
+void TencorSigmoidInPlace(Tencor *tencor);
+
 typedef float (*TencorUnaryFn)(float value, void *context);
 typedef float (*TencorBinaryFn)(float first, float second, void *context);
 

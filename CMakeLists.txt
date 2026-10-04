@@ -52,6 +52,9 @@ endif()
 
 target_compile_options(tencor PRIVATE ${TENCOR_WARNINGS})
 
+target_link_libraries(tencor PRIVATE m)
+target_compile_options(tencor PRIVATE -fno-math-errno)
+
 if(APPLE)
     target_link_options(tencor PRIVATE -Wl,-undefined,error)
 else()

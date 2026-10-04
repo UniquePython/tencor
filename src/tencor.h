@@ -3,10 +3,11 @@
 
 #include "types.h"
 #include "tencor/tencor.h"
+#include "attributes.h"
 
 #define TENCOR_DATA_ALIGNMENT 64
 
-struct Tencor
+struct TENCOR_DESIGNATED_INIT Tencor
 {
     f32 *data;
     usz ndim;

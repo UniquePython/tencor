@@ -113,6 +113,27 @@ void TencorDivScalarInto(Tencor *out, const Tencor *tencor, float scalar);
 
 TENCOR_API
 void TencorDivScalarInPlace(Tencor *tencor, float scalar);
+
+typedef float (*TencorUnaryFn)(float value, void *context);
+typedef float (*TencorBinaryFn)(float first, float second, void *context);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorUnaryMap(TencorArena *arena, const Tencor *tencor, TencorUnaryFn function, void *context);
+
+TENCOR_API
+void TencorUnaryMapInto(Tencor *out, const Tencor *tencor, TencorUnaryFn function, void *context);
+
+TENCOR_API
+void TencorUnaryMapInPlace(Tencor *tencor, TencorUnaryFn function, void *context);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorBinaryMap(TencorArena *arena, const Tencor *first, const Tencor *second, TencorBinaryFn function, void *context);
+
+TENCOR_API
+void TencorBinaryMapInto(Tencor *out, const Tencor *first, const Tencor *second, TencorBinaryFn function, void *context);
+
+TENCOR_API
+void TencorBinaryMapInPlace(Tencor *first, const Tencor *second, TencorBinaryFn function, void *context);
 // clang-format on
 
 #endif // TENCOR_TENCOR_H_

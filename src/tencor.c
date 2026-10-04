@@ -39,3 +39,16 @@ void TencorRequireElementwise(const Tencor *out, const Tencor *first, const Tenc
     TencorRequireNoPartialOverlap(out, first);
     TencorRequireNoPartialOverlap(out, second);
 }
+
+void TencorRequireUnary(const Tencor *out, const Tencor *input)
+{
+    RequireNonNull(out, "%s", "out is NULL");
+    RequireNonNull(input, "%s", "input is NULL");
+
+    TencorRequireSameShape(out, input);
+
+    Require(TencorIsContiguous(out), "%s", "out must be contiguous");
+    Require(TencorIsContiguous(input), "%s", "input must be contiguous");
+
+    TencorRequireNoPartialOverlap(out, input);
+}

@@ -19,5 +19,6 @@ struct TENCOR_DESIGNATED_INIT Tencor
 void TencorRequireSameShape(const Tencor *first, const Tencor *second);
 void TencorRequireNoPartialOverlap(const Tencor *first, const Tencor *second);
 void TencorRequireElementwise(const Tencor *out, const Tencor *first, const Tencor *second);
+void TencorRequireUnary(const Tencor *out, const Tencor *input);
 
 #endif // TENCOR_H_

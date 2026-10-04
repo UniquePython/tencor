@@ -13,6 +13,9 @@ TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
 Tencor *TencorCreate(TencorArena *arena, size_t ndim, const size_t *shape);
 
 TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorView(TencorArena *arena, const Tencor *base, size_t ndim, const size_t *shape);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
 Tencor *TencorZeros(TencorArena *arena, size_t ndim, const size_t *shape);
 
 TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL

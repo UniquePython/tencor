@@ -65,6 +65,18 @@ Tencor *TencorCreate(TencorArena *arena, usz ndim, const usz *shape)
     return tencorAllocHeader(arena, ndim, shape, nelem, data);
 }
 
+Tencor *TencorView(TencorArena *arena, const Tencor *base, usz ndim, const usz *shape)
+{
+    RequireNonNull(arena, "%s", "arena is NULL");
+    RequireNonNull(base, "%s", "base is NULL");
+    Require(TencorIsContiguous(base), "%s", "base must be contiguous");
+
+    usz nelem = tencorCountElements(ndim, shape);
+    Require(nelem == base->nelem, "element count mismatch: view has %zu, base has %zu", nelem, base->nelem);
+
+    return tencorAllocHeader(arena, ndim, shape, nelem, base->data);
+}
+
 Tencor *TencorZeros(TencorArena *arena, usz ndim, const usz *shape)
 {
     Tencor *tencor = TencorCreate(arena, ndim, shape);

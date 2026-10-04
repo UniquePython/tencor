@@ -77,6 +77,42 @@ void TencorDivInto(Tencor *out, const Tencor *first, const Tencor *second);
 
 TENCOR_API
 void TencorDivInPlace(Tencor *first, const Tencor *second);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorAddScalar(TencorArena *arena, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorAddScalarInto(Tencor *out, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorAddScalarInPlace(Tencor *tencor, float scalar);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorSubScalar(TencorArena *arena, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorSubScalarInto(Tencor *out, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorSubScalarInPlace(Tencor *tencor, float scalar);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorMulScalar(TencorArena *arena, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorMulScalarInto(Tencor *out, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorMulScalarInPlace(Tencor *tencor, float scalar);
+
+TENCOR_API TENCOR_NODISCARD TENCOR_RETURNS_NONNULL
+Tencor *TencorDivScalar(TencorArena *arena, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorDivScalarInto(Tencor *out, const Tencor *tencor, float scalar);
+
+TENCOR_API
+void TencorDivScalarInPlace(Tencor *tencor, float scalar);
 // clang-format on
 
 #endif // TENCOR_TENCOR_H_
